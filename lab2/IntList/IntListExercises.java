@@ -8,12 +8,29 @@ public class IntListExercises {
      *
      * @param lst IntList from Lecture
      */
-    public static void addConstant(IntList lst, int c) {
-        IntList head = lst;
-        while (head != null) {
-            head.first += c;
-            head = head.rest;
+    public static IntList addConstant(IntList lst, int c) {
+        // // first check if the list is empty
+        // if (lst == null) {
+        //     return null;
+        // }
+        // // Here Create a new IntList with the updated first element
+        // IntList result = new IntList(lst.first + c, null);
+        // IntList tail = result;
+
+        // // Iterate through the rest of the list and update elements
+        // IntList head = lst.rest;
+        // while (head != null) {
+        //     tail.rest = new IntList(head.first + c , null);
+        //     head = head.rest;
+        //     tail = tail.rest;
+        // }
+        // return result;
+        IntList tmp = lst;
+        while (tmp != null) {
+            tmp.first += c;
+            tmp = tmp.rest;
         }
+        return lst;
     }
 
     /**
@@ -35,7 +52,12 @@ public class IntListExercises {
 
     /** Returns the max value in the IntList starting at L. */
     public static int max(IntList L) {
+        if ( L == null) {
+            throw new IllegalArgumentException("List can not be null");
+
+        }
         int max = L.first;
+        // Iterate through the rest of the list and update max
         IntList p = L.rest;
         while (p != null) {
             if (p.first > max) {
@@ -50,11 +72,14 @@ public class IntListExercises {
      *  the first digit of x.
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
+        // Convert x to positive to handle negative numbers
+        x = Math.abs(x);
+
         int lastDigit = x % 10;
-        while (x > 10) {
+        while (x >= 10) {
             x = x / 10;
         }
-        int firstDigit = x % 10;
+        int firstDigit = x;
         return firstDigit == lastDigit;
     }
 
@@ -76,7 +101,10 @@ public class IntListExercises {
         if (currElemIsPrime) {
             lst.first *= lst.first;
         }
-
-        return currElemIsPrime || squarePrimes(lst.rest);
+        // Recursively process the rest of the list
+        boolean restUpdated = squarePrimes(lst.rest);
+        // Return true if either the current element was updated 
+        // or the rest of the list was updated
+        return currElemIsPrime || restUpdated;
     }
 }
