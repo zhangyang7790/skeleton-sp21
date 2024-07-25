@@ -53,7 +53,7 @@ public class IntListExercises {
     /** Returns the max value in the IntList starting at L. */
     public static int max(IntList L) {
         if ( L == null) {
-            throw new IllegalArgumentException("List can not be null");
+            return 1;
 
         }
         int max = L.first;
