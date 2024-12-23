@@ -39,6 +39,7 @@ public class SLList<Item> {
 	public Item getFirst() {
 		return sentinel.next.item;
 	}
+	
 
 	/** Adds x to the end of the list. */
 	public void addLast(Item x) {

@@ -41,12 +41,12 @@ public class IntListExercises {
      * @param L IntList from Lecture
      */
     public static void setToZeroIfMaxFEL(IntList L) {
-        IntList p = L;
+        IntList p = L; // 计算子链表的最大值
         while (p != null) {
             if (firstDigitEqualsLastDigit(max(p))) {
-                p.first = 0;
+                p.first = 0; // 满足条件则将当前节点值设置为0
             }
-            p = p.rest;
+            p = p.rest; // 移动到下一个节点
         }
     }
 
@@ -73,7 +73,8 @@ public class IntListExercises {
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
         // Convert x to positive to handle negative numbers
-        x = Math.abs(x);
+        // 末位数字： x % 10, 首位数字： 不断对X除以10， 直到剩下的数字小于10.
+        x = Math.abs(x); // 处理负数
 
         int lastDigit = x % 10;
         while (x >= 10) {
@@ -91,20 +92,16 @@ public class IntListExercises {
      * @return True if there was an update to the list
      */
     public static boolean squarePrimes(IntList lst) {
-        // Base Case: we have reached the end of the list
-        if (lst == null) {
-            return false;
-        }
+        boolean updated = false; // 标记是否有更新
+        IntList p = lst;
 
-        boolean currElemIsPrime = Primes.isPrime(lst.first);
-
-        if (currElemIsPrime) {
-            lst.first *= lst.first;
+        while (p != null) {
+            if (Primes.isPrime(p.first)) {
+                p.first *= p.first; // 平方质数值
+                updated = true;
+            }
+            p = p.rest;
         }
-        // Recursively process the rest of the list
-        boolean restUpdated = squarePrimes(lst.rest);
-        // Return true if either the current element was updated 
-        // or the rest of the list was updated
-        return currElemIsPrime || restUpdated;
+        return updated; // 返回是否有更新
     }
 }

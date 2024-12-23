@@ -25,22 +25,24 @@ public class TimeAList {
         // TODO: YOUR CODE HERE
         int[] Ns = {1000, 2000,4000,8000,16000,32000,64000,128000};
 
-        Alist<Integer> sizes = new Alist<>();
-        Alist<Double> times = new Alist<>();
-        Alist<Integer> opCounts = new Alist<>();
+        AList<Integer> sizes = new AList<>();
+        AList<Double> times = new AList<>();
+        AList<Integer> opCounts = new AList<>();
 
         for (int N : Ns) {
-            Alist<Integer> list = new Alist<>();
+            AList<Integer> list = new AList<>();
             Stopwatch sw = new Stopwatch();
 
             for (int i = 0; i < N; i++) {
                 list.addLast(i);
-        }
+            }
             double timeInSeconds = sw.elapsedTime();
 
             sizes.addLast(N);
-            times.addLasst(timeInSeconds);
+            times.addLast(timeInSeconds);
             opCounts.addLast(N);
-    }
-}       
+            
+        }
+        printTimingTable(sizes, times, opCounts);
+    }       
 }
